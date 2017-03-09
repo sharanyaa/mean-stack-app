@@ -35,3 +35,10 @@ underscore pkg - a popular set of functional programming-inspired utility functi
 }
 
 npm install - install dependencies in dir node_module/ in pwd
+
+Callback functions - callbacks are functions you provide to the Node.js driver to specify what to do once a given operation completes. In most cases, the Node.js driver, and most applications in JavaScript for that matter, you don't write code that calls a function and expects to receive a return value. Instead, you pass a callback to most functions as one of the parameters. The connect function will in turn execute this callback, typically as the last step it executes before returning.
+
+Once, again the .connect function does not return a handle to a MongoDB connection. Instead, you need to pass a callback function that the MongoDB driver executes when your MongoDB handle is ready.
+Once again, this type of function is called a callback. The callback takes two parameters-- an error and a db handle.
+Most Node.js callbacks have the same form. If the operation fails, the callback gets an error as the first argument. If the operation succeeds, the callback gets null as the first argument and the result of the operation as the second argument.
+In the case of this code, if the callback gets an error, that means that the driver cannot connect to MongoDB. For example, if I were to shut down MongoDB here and then run this script, you see I get a connection refused error. Now, if error is null, that means there was no error and you now have a db handle that you can use to interact with MongoDB. So with this db handle, you can now insert a JSON object into a MongoDB collection.
